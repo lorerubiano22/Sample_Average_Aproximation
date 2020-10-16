@@ -1,3 +1,2 @@
 # inst	   	mAxTime(s)	Beta	seed shortSim LongSim var  deter(true)/Stoc(false)						
-p1.4.m	50	0.3	1025001	500	5	0.05	false
-p1.4.m	50	0.3	1025001	500	5	0.75	false
+dummy	50	0.3	1025001	500	5	0.05	false
