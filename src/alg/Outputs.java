@@ -14,9 +14,10 @@ public class Outputs
     /* INSTANCE FIELDS & CONSTRUCTOR */
     private Solution bestInitSol;
     private Solution bestSol;
-    private String instanceName;
+    private static String instanceName;
+    private static String fileName;
     private float lambda;
-    private float variance;
+    private static float variance;
     private float runningTime;
     private double alpha; 
     private double beta;
@@ -74,33 +75,28 @@ public class Outputs
     public ArrayList<Solution> getFinalsol() {return finalsol;}
 
 
-	public static void printSol(ArrayList<Outputs> list){
+	public static  void printSol(ArrayList<Outputs> list){
 		try 
 		{   
-			PrintWriter out = new PrintWriter("GlobalOutput.txt");
 			for (int i = 0; i < list.size(); i++){
+				fileName="Solution_"+instanceName+"_"+variance;
+				PrintWriter out = new PrintWriter(fileName+"_.txt");
 				Solution singleList = list.get(i).getOBSol(); //Solution
                 double coste = 0.0;
                 double profit = 0.0;
-				out.printf("%s\n", list.get(i).getInstanceName());
-
 				for (int j = 0; j < singleList.getRoutes().size(); j++){
 					Route r = singleList.getRoutes().get(j); //Obtengo la ruta
-					out.printf("Ruta: %d Coste ruta: %f\n", j, r.getCosts());
-					out.printf("        Profit ruta: %f\n", r.getScore());
+				
 					Node last = null;
 					for(Edge e: r.getEdges()){ //obtengo edges
-						out.printf("%d -- ", e.getOrigin().getId());	
+						out.printf(e.getOrigin().getId()+"-");	
 						last = e.getEnd();
 					}
-					coste += r.getCosts();
-					out.printf("\n");
+					out.printf(last.getId()+"\n");	
 				} 
-				out.printf("Coste total Solution: %f \n",coste);
-				out.printf("Profit total Solution: %f \n",singleList.getTotalScore());
-				out.print("\n\n");
+				out.close();
 			}//end for
-			out.close();
+			
 		} 
 		catch (IOException exception) 
 		{   System.out.println("Error processing output file: " + exception);
@@ -134,7 +130,7 @@ public class Outputs
 		try 
 		{   
 			PrintWriter out = new PrintWriter("ResumeSols.txt");
-			out.printf("TypeExec	Instance	Seed	Profit StoProfit	Reliability	RunTime");
+			out.printf("TypeExec	Instance	Seed	Variance    StoProfit    StochCost	  RunTime");
 			for(Outputs o : list){
 				Solution sol = o.getOBSol();
 				out.println();
@@ -147,9 +143,9 @@ public class Outputs
 					out.printf("Sto	%s",o.getInstanceName());					
 				}	
 				out.printf("	"+(int)o.getSeed());
-				out.printf("	%.2f",sol.getTotalScore());
-				out.printf("	%.2f", sol.getStochScore());
-				out.printf("	%.2f",sol.getReliability());
+				out.printf("	%.2f",o.getK());
+				out.printf("	%.2f",sol.getStochScore());
+				out.printf("	%.2f", sol.getStochCost());
 				out.printf("	%.2f",sol.getTime());
 				
 			}
@@ -159,4 +155,10 @@ public class Outputs
 		{   System.out.println("Error processing output file: " + exception);
 		}
 	}//end method
+
+
+	public void setVariance(float variance) {
+		// TODO Auto-generated method stub
+		
+	}
 }

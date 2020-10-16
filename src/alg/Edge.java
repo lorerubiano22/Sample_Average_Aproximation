@@ -18,7 +18,7 @@ public class Edge implements Serializable
     private double classicSavings = 0.0;
     private Route inRoute = null; // route containing this edge (0 if no route assigned)
     private Edge inverseEdge = null; // edge with inverse direction
-    private double[] stoCosts = 0.0; // edge costs
+    private double[] stoCosts = null; // edge costs
             
     public Edge(Node originNode, Node endNode) 
     {   key=originNode.getId()+","+endNode.getId();
@@ -56,6 +56,7 @@ public class Edge implements Serializable
     public Node getOrigin(){return origin;}
     public Node getEnd(){return end;}
     public double getCosts(){return costs;}
+    public double getMeanCosts(){return meanCosts;}
     public double getSavings(){return savings;}
     public Route getInRoute(){return inRoute;}
     public Edge getInverseEdge(){return inverseEdge;}

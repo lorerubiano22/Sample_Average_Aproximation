@@ -86,13 +86,16 @@ public class MultiStartTester
 			output.setOBSol(bestSolution);
 			output.setInstanceName(aTest.getInstanceName());
 			output.setseed(aTest.getSeed());
+			output.setK(aTest.getVariance());
+			
 			outList.add(output);
 			Integer best_score = BKS.bestSolution(aTest.getInstanceName());  
+			Outputs.printSolST(outList,aTest);
+
+			Outputs.printSol(outList);
 		}
 
-		Outputs.printSolST(outList,aTest);
 
-		Outputs.printSol(outList);
 
 
 

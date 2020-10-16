@@ -1,2 +1,3 @@
-TypeExec	Instance	Seed	Profit StoProfit	Reliability	RunTime
-Sto	p1.4.m	1025001	130,00	80,00	0,13	28,19
+TypeExec	Instance	Seed	Variance    StoProfit    StochCost	  RunTime
+Sto	p1.4.m	1025001	0,75	130,00	81,33	8,05
+Sto	p1.4.m	1025001	0,75	120,00	77,67	12,33
